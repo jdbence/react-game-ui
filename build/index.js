@@ -90,12 +90,12 @@ Object.defineProperty(exports, 'UI', {
   }
 });
 
-var _StepProgress = __webpack_require__(3);
+var _Repeat = __webpack_require__(3);
 
-Object.defineProperty(exports, 'StepProgress', {
+Object.defineProperty(exports, 'Repeat', {
   enumerable: true,
   get: function get() {
-    return _interopRequireDefault(_StepProgress).default;
+    return _interopRequireDefault(_Repeat).default;
   }
 });
 
@@ -168,7 +168,11 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _utility = __webpack_require__(4);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -176,30 +180,79 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var StepProgress = function (_React$Component) {
-  _inherits(StepProgress, _React$Component);
+/**
+ * Repeats an element on the screen
+ */
+var Repeat = function (_React$Component) {
+  _inherits(Repeat, _React$Component);
 
-  function StepProgress() {
-    _classCallCheck(this, StepProgress);
+  function Repeat() {
+    var _ref;
 
-    return _possibleConstructorReturn(this, (StepProgress.__proto__ || Object.getPrototypeOf(StepProgress)).apply(this, arguments));
+    var _temp, _this, _ret;
+
+    _classCallCheck(this, Repeat);
+
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Repeat.__proto__ || Object.getPrototypeOf(Repeat)).call.apply(_ref, [this].concat(args))), _this), Object.defineProperty(_this, 'forceRender', {
+      enumerable: true,
+      writable: true,
+      value: function value() {
+        _this.setState({ key: Math.random() });
+      }
+    }), _temp), _possibleConstructorReturn(_this, _ret);
   }
 
-  _createClass(StepProgress, [{
+  _createClass(Repeat, [{
     key: 'render',
     value: function render() {
+      var _props = this.props,
+          value = _props.value,
+          element = _props.element;
+
+      var generator = (0, _utility.isFunction)(element) ? element : function () {
+        return element;
+      };
+      var steps = [].concat(_toConsumableArray(Array(value))).map(generator);
       return _react2.default.createElement(
         'div',
         null,
-        'StepProgress UI'
+        steps
       );
     }
   }]);
 
-  return StepProgress;
+  return Repeat;
 }(_react2.default.Component);
 
-exports.default = StepProgress;
+Object.defineProperty(Repeat, 'defaultProps', {
+  enumerable: true,
+  writable: true,
+  value: {
+    value: 5,
+    element: "⭐"
+  }
+});
+exports.default = Repeat;
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.isFunction = isFunction;
+function isFunction(value) {
+  return value instanceof Function;
+  //return typeof value === 'function';
+}
 
 /***/ })
 /******/ ]);
