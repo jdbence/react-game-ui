@@ -41,8 +41,11 @@ class RndProgress extends React.Component {
   }
   render(){
     const {size} = this.state;
-    return <Progress value={size} />
+    const { children, property } = this.props;
+    const childrenWithProps = React.Children.map(children, child =>
+      React.cloneElement(child, { [property || 'value']: size }));
+    return <div>{childrenWithProps}</div>
   }
 }
-;<RndProgress />
+;<RndProgress><Progress/></RndProgress>
 ```
